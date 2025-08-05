@@ -18,7 +18,14 @@
     if (enrollees.length === 0) {
       list.innerHTML = '<li>No enrollees yet.</li>';
     } else {
-      list.innerHTML = enrollees.map(e => `<li>${e.name} (Age: ${e.age})</li>`).join('');
+      list.innerHTML = enrollees.map(e => 
+        `<li>
+          ${e.name} (Age: ${e.age})<br>
+          Coach: ${e.coach}<br>
+          Date: ${e.date}<br>
+          Time: ${e.time}
+        </li>`
+      ).join('');
     }
   </script>
 </body>

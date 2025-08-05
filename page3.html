@@ -13,6 +13,15 @@
     <form class="enroll-form" id="enrollForm">
       <input type="text" name="name" placeholder="Name" required class="enroll-input" />
       <input type="number" name="age" placeholder="Age" min="0" required class="enroll-input" />
+      <select name="coach" required class="enroll-input">
+        <option value="" disabled selected>Select Coach</option>
+        <option value="Chiklet">Chiklet</option>
+        <option value="Candy">Candy</option>
+        <option value="Sugar">Sugar</option>
+        <option value="Jelly">Jelly</option>
+      </select>
+      <input type="date" name="date" required class="enroll-input" />
+      <input type="time" name="time" required class="enroll-input" />
       <button type="submit" class="enroll-btn">Enroll</button>
     </form>
   </div>
@@ -21,12 +30,16 @@
       e.preventDefault();
       const name = this.name.value.trim();
       const age = this.age.value.trim();
-      if (!name || !age) return;
+      const coach = this.coach.value;
+      const date = this.date.value;
+      const time = this.time.value;
+      if (!name || !age || !coach || !date || !time) return;
       const enrollees = JSON.parse(localStorage.getItem('enrollees') || '[]');
-      enrollees.push({ name, age });
+      enrollees.push({ name, age, coach, date, time });
       localStorage.setItem('enrollees', JSON.stringify(enrollees));
       this.reset();
       alert('Enrollment successful!');
+      window.location.href = 'index.html';
     });
   </script>
 </body>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enroll</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button onclick="location.href='index.html'" style="position:absolute;top:30px;left:30px;">Back to Home</button>
+  <div class="enroll-form-container">
+    <h2 class="enroll-header">Enroll</h2>
+    <form class="enroll-form" id="enrollForm">
+      <input type="text" name="name" placeholder="Name" required class="enroll-input" />
+      <input type="number" name="age" placeholder="Age" min="0" required class="enroll-input" />
+      <button type="submit" class="enroll-btn">Enroll</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('enrollForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.name.value.trim();
+      const age = this.age.value.trim();
+      if (!name || !age) return;
+      const enrollees = JSON.parse(localStorage.getItem('enrollees') || '[]');
+      enrollees.push({ name, age });
+      localStorage.setItem('enrollees', JSON.stringify(enrollees));
+      this.reset();
+      alert('Enrollment successful!');
+    });
+  </script>
+</body>
+</html>

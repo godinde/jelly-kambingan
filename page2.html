@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learners</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button onclick="location.href='index.html'" style="position:absolute;top:30px;left:30px;">Back to Home</button>
+  <div class="learners-list-container">
+    <h2 class="learners-header">List of Enrollees</h2>
+    <ul id="learnersList" class="learners-list"></ul>
+  </div>
+  <script>
+    const list = document.getElementById('learnersList');
+    const enrollees = JSON.parse(localStorage.getItem('enrollees') || '[]');
+    if (enrollees.length === 0) {
+      list.innerHTML = '<li>No enrollees yet.</li>';
+    } else {
+      list.innerHTML = enrollees.map(e => `<li>${e.name} (Age: ${e.age})</li>`).join('');
+    }
+  </script>
+</body>
+</html>

@@ -26,6 +26,16 @@
     </form>
   </div>
   <script>
+    // Pre-select coach if provided in URL
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const coach = params.get('coach');
+      if (coach) {
+        const select = document.querySelector('select[name="coach"]');
+        if (select) select.value = coach;
+      }
+    });
+
     document.getElementById('enrollForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = this.name.value.trim();

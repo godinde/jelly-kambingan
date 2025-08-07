@@ -71,6 +71,11 @@ body {
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  justify-items: center;
+  align-items: end;
+  /* Ensure grid items are centered and aligned to bottom */
 }
 
 .nav-btn {
@@ -82,14 +87,37 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
+  transition: 
+    background 0.2s, 
+    box-shadow 0.2s, 
+    color 0.2s,
+    transform 0.25s cubic-bezier(.68,-0.55,.27,1.55),
+    z-index 0s,
+    opacity 0.18s;
   width: 100%;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  justify-self: center;
+  /* Center the button in its grid cell */
 }
 .nav-btn:hover {
-  background: #e0e0e0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  z-index: 10;
+  background: #bdbdbd;
+  color: #222;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: scale(1.7) translateY(20px);
+}
+
+/* Remove any special case for only the first button */
+.side-buttons-grid .nav-btn:not(:hover) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.side-buttons-grid .nav-btn:hover ~ .nav-btn,
+.side-buttons-grid .nav-btn:has(~ .nav-btn:hover) {
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .performers-grid {
@@ -173,12 +201,10 @@ body {
   gap: 24px;
   max-width: 420px;
   margin: 100px auto 0 auto;
-}
-
-.coach-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  z-index: 1;
+  justify-items: center;
+  align-items: end;
 }
 
 .coach-btn {
@@ -192,6 +218,33 @@ body {
   align-items: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    color 0.2s,
+    transform 0.25s cubic-bezier(.68,-0.55,.27,1.55),
+    z-index 0s,
+    opacity 0.18s;
+  justify-self: center;
+}
+
+.coach-btn:hover {
+  z-index: 10;
+  background: #bdbdbd;
+  color: #222;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: scale(1.7) translateY(20px);
+}
+
+.coaches-grid .coach-btn:not(:hover) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.coaches-grid .coach-btn:hover ~ .coach-btn,
+.coaches-grid .coach-btn:has(~ .coach-btn:hover) {
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .enroll-form-container {
@@ -229,6 +282,15 @@ body {
   font-size: 1rem;
   background: #f7f7f7;
   font-weight: 500;
+}
+
+.enroll-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+  display: block;
+  text-align: left;
 }
 
 .enroll-btn {
@@ -287,4 +349,132 @@ body {
   font-size: 1.1rem;
   font-weight: 500;
   text-align: center;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 0 14px 0;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.07);
+  z-index: 1001;
+}
+
+.contact-us-btn,
+.browse-jobs-btn {
+  position: static;
+  background: transparent;
+  color: #222;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-us-btn:hover,
+.browse-jobs-btn:hover {
+  color: #444;
+  background: transparent;
+  box-shadow: none;
+}
+.browse-jobs-btn:hover {
+  background: #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+
+.contact-us-btn {
+  position: relative;
+  overflow: visible;
+}
+
+.contact-balloon {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  background: #fffbe7;
+  border: 2px solid #ffd54f;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  padding: 24px 20px 18px 20px;
+  text-align: center;
+  z-index: 2000;
+  animation: balloon-pop 0.22s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes balloon-pop {
+  0% { transform: translateX(-50%) scale(0.2); opacity: 0; }
+  80% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+.contact-us-btn:hover .contact-balloon,
+.contact-us-btn:focus .contact-balloon {
+  display: block;
+}
+
+.contact-balloon-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.18s;
+}
+
+.contact-balloon-option:hover {
+  color: #e65100;
+  text-decoration: underline;
+}
+
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2002;
+}
+
+.loading-spinner {
+  width: 54px;
+  height: 54px;
+  border: 6px solid #222;
+  border-top: 6px solid #bdbdbd;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 18px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.loading-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 1.2rem;
+  color: #222;
+  font-weight: 600;
+  letter-spacing: 1px;
 }

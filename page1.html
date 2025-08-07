@@ -9,7 +9,11 @@
 <body>
   <button onclick="location.href='index.html'" style="position:absolute;top:30px;left:30px;">Back to Home</button>
   <h1 class="coaching-header">Book your Coaching Session</h1>
-  <div class="coaches-grid">
+  <div id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading Coaches...</div>
+  </div>
+  <div class="coaches-grid" id="coachesGrid" style="display:none;">
     <div class="coach-card">
       <button class="coach-btn" onclick="location.href='page3.html?coach=Chiklet'">
         <img src="./images/chiklet.png" alt="Photo" class="performer-photo" />
@@ -39,7 +43,14 @@
       </button>
     </div>
   </div>
-</body>
-</html>
+  <script>
+    // Show loading spinner for 1 second, then show coaches
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('loading-overlay').style.display = 'none';
+        document.getElementById('coachesGrid').style.display = '';
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
